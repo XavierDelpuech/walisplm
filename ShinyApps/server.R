@@ -1,4 +1,4 @@
-function(input, output) {
+function(input, output, source) {
   #browser() ## permet d'arreter le code pour debogage
   ## source model Walis
   source("Walis_2011-02-28.R",encoding="UTF-8")
