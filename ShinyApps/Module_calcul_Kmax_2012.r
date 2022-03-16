@@ -1,5 +1,5 @@
-# Auteurs :Philippe Pieri, Benjamin Bois - INRA, Equipe Ecophysiologie et Agronomie Viticole; 71, Rue Edouard Bourlaux B.P. 81, 33 883 VILLENAVE D’ORNON Cedex- contact : bbois@bordeaux.inra.fr
-# Traduction en langage R : Xavier Delpuech, IFV, Domaine de Donadille, 30230 Rodilhan. xavier.delpuech@vignevin.com , février 2012
+# Auteurs :Philippe Pieri, Benjamin Bois - INRA, Equipe Ecophysiologie et Agronomie Viticole; 71, Rue Edouard Bourlaux B.P. 81, 33 883 VILLENAVE DÂ’ORNON Cedex- contact : bbois@bordeaux.inra.fr
+# Traduction en langage R : Xavier Delpuech, IFV, Domaine de Donadille, 30230 Rodilhan. xavier.delpuech@vignevin.com , fÃ©vrier 2012
 # Bibliographie
 # LEBON, E., DUMAS, V., PIERI, P. and SCHULTZ, H. R., 2003. Modelling the seasonal dynamics of the soil water balance of vineyards. Functional Plant Biology 30 (6).
 # RIOU, C., PIERI, P. and CLECH, B. L., 1994. Water use of grapevines well supplied with water. Simplified expression of transpiration. Vitis 33 (3).
@@ -15,8 +15,8 @@ az_r=0, poro_r=0.25, alb_f=0.22, alb_s=0.18, Dt=1800, r_rgi=20)
 #Dt = 1800
 #r_lat = latitude    # =44.5
 #r_longit = 0
-#az_r = azimut # =0   Azimut en degrés (ex: 0=NS ; 90=EW ; -45 = NW-SE )
-#d_r = d      # =1.5 Distance inter-rang (en mètres)
+#az_r = azimut # =0   Azimut en degrÃ©s (ex: 0=NS ; 90=EW ; -45 = NW-SE )
+#d_r = d      # =1.5 Distance inter-rang (en mÃ¨tres)
 #alb_f = 0.22
 #alb_s = alb_sol  # =0.18
 #i_year = n_an
@@ -24,7 +24,7 @@ az_r=0, poro_r=0.25, alb_f=0.22, alb_s=0.18, Dt=1800, r_rgi=20)
 #r_rgi = rg    # par defaut = 20
 #hf_r = hautf # =1 Hauteur de feuillage (en metres)
 #lf_r = largf  # =0.4 Largeur de feuillage (en metres)
-#poro_r = poro   # =0.25 Porosite min en ete, de 0 à 1 (0=aucun trou dans le feuillage)
+#poro_r = poro   # =0.25 Porosite min en ete, de 0 Ã  1 (0=aucun trou dans le feuillage)
 
 #calculates daily integrals for radiation interception by vine rows and soil in a vineyard
 #parameters
@@ -32,14 +32,14 @@ rDt = Dt
 rLatitude = r_lat
 rLongitude = r_longit
 iYear = i_year
-rOrientRangs = az_r     #à l#entrée :   0 pour rangs NS, 90 pour EW et -45 pour NW-SE
-    #ici en entrée, rOrientRangs  en degrés :    ( 0=NS ; 90=EW )  ( -45 = NW-SE )
-    #passage direction des rangs à angle de la normale aux rangs avec la direction NS
-rOrientRangs = rOrientRangs + 90                            #orientée de N à S
+rOrientRangs = az_r     #Ã  l#entrÃ©e :   0 pour rangs NS, 90 pour EW et -45 pour NW-SE
+    #ici en entrÃ©e, rOrientRangs  en degrÃ©s :    ( 0=NS ; 90=EW )  ( -45 = NW-SE )
+    #passage direction des rangs Ã  angle de la normale aux rangs avec la direction NS
+rOrientRangs = rOrientRangs + 90                            #orientÃ©e de N Ã  S
         #If rOrientRangs >= 180 Then rOrientRangs = rOrientRangs - 180     CORRIGE LE 31/03/98 :
 if (rOrientRangs >= 90) rOrientRangs = rOrientRangs - 180
 #donc angle normale = -90 pour rangs NS, 0 pour EW , 45 pour NW-SE et -45 pour NE-SW
-#orientation comme angles d#azimut solaire, à partir du Sud, négatifs le matin et positifs l#après-midi
+#orientation comme angles d#azimut solaire, Ã  partir du Sud, nÃ©gatifs le matin et positifs l#aprÃ¨s-midi
 rEcartRangs = d_r
 rHautRang = hf_r
 rLargRang = lf_r
@@ -49,11 +49,11 @@ rAlbedoSol = alb_s
 
  #variables d#entree :
 iSimulDay = i_doy
-rRgiJour = r_rgi * 1000000               #MJ.m^-2  à  J.m^-2
+rRgiJour = r_rgi * 1000000               #MJ.m^-2  Ã   J.m^-2
 
 # *****************************************  DEBUT  JOURNEE  ***************************************
 
-rSJRytGlo = 0           #intialisation des intégrales journalières Rayonnement
+rSJRytGlo = 0           #intialisation des intÃ©grales journaliÃ¨res Rayonnement
 rSJRytDif = 0
 rSJRytGloVigne = 0
 rSJRytGloSol = 0
@@ -77,7 +77,7 @@ iSJdiurne = 0
 #           rDoyPerig, date perigee (jour)
 #           rEpsilonRad, obliquite(radian)
 #
-## ian=à définir
+## ian=Ã  dÃ©finir
 ian=iYear
 rOmegaRadparJour = 2 * pi / 365.25636
 rDoyEqui = 80.08 + 0.2422 * (ian - 1900) - trunc((ian - 1901) / 4)
@@ -87,14 +87,14 @@ rDoyPerig = rDoyEqui + (rLongitPerigRad - 2 * rExentr * sin(rLongitPerigRad)) / 
 rEpsilonRad = 0.40932 - 0.000002271 * (ian - 1900)
 ian = 1
  
-#    Call ParSolJour((iYear), (iSimulDay)) # remplacé par le sous-programme lui-même
+#    Call ParSolJour((iYear), (iSimulDay)) # remplacÃ© par le sous-programme lui-mÃªme
 #ParSolJour(ian As Integer, iNJ As Integer)
 #   Calcul de la LONGITUDE CELESTE, de la DECLINAISON du Soleil
 #      (radians), de l'EQUATION du TEMPS (minutes) pour le jour iNJ de
 #      de l'annee iAn.
 
 #   ATTENTION
-#        Ce SOUS-PROGRAMME ne peut etre executé qu'apres le SOUS-PRO-
+#        Ce SOUS-PROGRAMME ne peut etre executÃ© qu'apres le SOUS-PRO-
 #        GRAMME  PSOLAN(iAn, ...) qui definit les parametres solaires annuels
 #
 #      COMMON /PARAN/rOmegaRadparJour,rDoyEqui,rLongitPerigRad,rExentr,rDoyPerig,rEpsilonRad
@@ -111,7 +111,7 @@ rEquaTemps = 720 / pi * (atan(tan(rLongitCelesteRad) * cos(rEpsilonRad)) - rOmeg
 while (rEquaTemps <= -100) (rEquaTemps = rEquaTemps + 720)
 ### fin sous-programme
 
-# Call ParSolJourBis((iYear), (iSimulDay)) # remplacé par le sous-programme lui-même
+# Call ParSolJourBis((iYear), (iSimulDay)) # remplacÃ© par le sous-programme lui-mÃªme
 # ParSolJourBis(ian As Integer, iNJ As Integer)
 #   Calcul de l'HEURE de PASSAGE du Soleil au MERIDIEN, de l'HEURE du
 #      LEVER et du COUCHER du Soleil (h TU), de la DUREE du JOUR (h)
@@ -119,7 +119,7 @@ while (rEquaTemps <= -100) (rEquaTemps = rEquaTemps + 720)
 #   Calcul du RAYONNEMENT GLOBAL EXTRATERRESTRE (Joule.m-2). On a admis
 #      une valeur de la constante solaire de 1353 watt.m-2
 #
-#   Pour passer à l'heure legale, ajouter le décalage par rapport a l'heure TU
+#   Pour passer Ã  l'heure legale, ajouter le dÃ©calage par rapport a l'heure TU
 #   (ex.: en FRANCE, +1h ou +2h selon la periode de l'annee, en GUADELOUPE, -4h, etc...)
 #
 #   ATTENTION
@@ -127,7 +127,7 @@ while (rEquaTemps <= -100) (rEquaTemps = rEquaTemps + 720)
 #        d'executer dans l'ordre les SOUS PROGRAMMES:
 #            PSOLAN(iAn) pour definir les parametres annuels
 #            PSOLJ(NJ) pour definir les parametres journaliers
-#        Il faut aussi preciser le lieu en définissant
+#        Il faut aussi preciser le lieu en dÃ©finissant
 #
 #Dim rNJ, rLatRad, rRefrac, X, a, b, C                               As Double
 #Global rHrMidi, rDurJour, rHrLevSol, rHrCouSol, rRytGloExtraAtmJour        As Double
@@ -139,7 +139,7 @@ rLatRad = rLatitude * pi / 180
 #HEURE DE PASSAGE du Soleil  au MERIDIEN
 rHrMidi = 12 + rLongitude / 15 + rEquaTemps / 60
 
-#Durée du jour, avec rRefrac, Correction de réfraction atmosphérique
+#DurÃ©e du jour, avec rRefrac, Correction de rÃ©fraction atmosphÃ©rique
 rRefrac = -0.0106
 if (abs(rLatitude)== 90) X=(rLatRad * (rRefrac - rDeltaRad) * 1000000) else X=(sin(rRefrac) - sin(rLatRad) * sin(rDeltaRad)) / cos(rLatRad) / cos(rDeltaRad)
 if (X==0) rDurJour = 12
@@ -178,29 +178,29 @@ if (rHautRang>0) {  #********************  DEBUT BOUCLE rHautRang > 0  *********
                     #MsgBox "rLAI >0  := " & rLAI & snl() & "jour et heure = " & iSimulDay & "  ,  " & rHr
 
 rLatRad = rLatitude * pi / 180               #Latitude en radians
-rOrientRangsRad = rOrientRangs * pi / 180    #Où rOrientRangs = ANGLE NORMALE AU RANG AVEC DIRECTION NORD-->SUD (DEGRES)
+rOrientRangsRad = rOrientRangs * pi / 180    #OÃ¹ rOrientRangs = ANGLE NORMALE AU RANG AVEC DIRECTION NORD-->SUD (DEGRES)
 
-                             #Début Appel Sous-Programmes Rayonnement
+                             #DÃ©but Appel Sous-Programmes Rayonnement
 #       Sub AbsDiffus()
 #       ex-subroutine KDIFFU(rKdif, rKdifSol, imodel)
 #       Calcul des coefficients d'interception du rayonnement diffus :
 #       rKdif,  rayonnement venant du ciel et rKdifSol, rayonnement venant du sol
 #       1 variante : mur poreux sauf haut et bas, ex. Vigne  (issu de MODELM.FOR)
-#  c    porosité du feuillage rPorosite
+#  c    porositÃ© du feuillage rPorosite
 #      common /ccultu/rEcartRangs,rHautTotMax,rHautRang,rLargRang,rOrientRangs,rAlbedoFeuilles,rAlbedoSol,rPorosite
 #Dim rKDIF1, rKDIF2, rKDIF3  As Double          DECLARE en GLOBAL
 
-# ... fraction du rayonnement diffus intercepté par la masse foliaire de la vigne
-        #par les parties supérieures des rangs (horizontales et non poreuses)
+# ... fraction du rayonnement diffus interceptÃ© par la masse foliaire de la vigne
+        #par les parties supÃ©rieures des rangs (horizontales et non poreuses)
         rKDIF1 = rLargRang / rEcartRangs
         #facteur de forme entre 2 rangs voisins : auparavant dans sub Calcul_PAR()
         rFF0 = tan(0.5 * atan(rHautRang / (rEcartRangs - rLargRang)))
-        #facteur de forme entre les parois horizontales entre les rangs, supérieure et inférieure.
+        #facteur de forme entre les parois horizontales entre les rangs, supÃ©rieure et infÃ©rieure.
         rFFdif = tan(0.5 * atan((rEcartRangs - rLargRang) / rHautRang))
-        #par les parois verticales (d'abord supposées non poreuses)                 'eq 16 de Riou et al., 1989
+        #par les parois verticales (d'abord supposÃ©es non poreuses)                 'eq 16 de Riou et al., 1989
         rKDIF2 = (1 - rFFdif)
         rKDIF2 = rKDIF2 * (1 - rLargRang / rEcartRangs)
-        #par les parties inférieures des rangs (horizontales et non poreuses)       'eq 20 de Riou et al., 1989
+        #par les parties infÃ©rieures des rangs (horizontales et non poreuses)       'eq 20 de Riou et al., 1989
         rKDIF3 = (sin(0.5 * atan(2 * rHautRang / rLargRang))) ^ 2
         rKDIF3 = rKDIF3 - (sin(0.5 * atan(rHautRang / (rEcartRangs - rLargRang / 2)))) ^ 2
         rKDIF3 = rKDIF3 * 2 * rLargRang / rEcartRangs
@@ -210,7 +210,7 @@ rOrientRangsRad = rOrientRangs * pi / 180    #Où rOrientRangs = ANGLE NORMALE AU
 
 # Sub CoefAbsRytDiff()
 #       ex-subroutine ARDIF (rKdif,rKdifSol,cardif,crrdif)
-#       calcul des taux d'absorption (cardif) et de réflexion (crrdif) du rayt.diffus
+#       calcul des taux d'absorption (cardif) et de rÃ©flexion (crrdif) du rayt.diffus
 #       common /ccultu/rEcartRangs,rHautTotMax,rHautMax,rLargMax,rOrientRangs,rAlbedoFeuilles,rAlbedoSol,rPorositeMin
 rCardif = (1 - rAlbedoFeuilles) * ((1 - rAlbedoSol * rKdifSol) * rKdif + rAlbedoSol * rKdifSol)
 rCrrdif = (rAlbedoFeuilles - rAlbedoSol * (1 - rKdifSol) - rAlbedoFeuilles * rAlbedoSol * rKdifSol / 2) * rKdif
@@ -218,7 +218,7 @@ rCrrdif = rCrrdif + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
 # fin sub
 
 #            Sub PosGeomLim()
-#       Positions Géométriques Limites
+#       Positions GÃ©omÃ©triques Limites
 #       ex-subroutine cbetal(rBetaLim, nbetal, imodel)
 #       interception du Rayonnement Solaire Direct
 #       calcul des nbetal valeurs de rBetaLim(),
@@ -235,8 +235,8 @@ rCrrdif = rCrrdif + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
 
 
    # premier indice pour boucle horaire :
-   #(le temps rTempsTUFirst lu dans data_H doit être en heures TU decimales et centrées)
-   j = 0                                                        #calculs à partir de 0 h
+   #(le temps rTempsTUFirst lu dans data_H doit Ãªtre en heures TU decimales et centrÃ©es)
+   j = 0                                                        #calculs Ã  partir de 0 h
 
 # *****************************************  DEBUT BOUCLE HORAIRE  ***************************************
    repeat
@@ -247,17 +247,17 @@ rCrrdif = rCrrdif + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
 
     #MsgBox "jour et heure = " & iSimulDay & "  ,  " & rHr
 
-# sous-programme        ParSolHor((rHr))                #paramètre rHr = Heure TU (h)
+# sous-programme        ParSolHor((rHr))                #paramÃ¨tre rHr = Heure TU (h)
 ### ParSolHor
-#      Calcul des rHautSol et rAzimSol du Soleil (degres) à l#heure rHr (en h TU)
+#      Calcul des rHautSol et rAzimSol du Soleil (degres) Ã  l#heure rHr (en h TU)
 #      du jour iNJ de l#annee iAn pour un lieu de Latitude rLatitude, de
-#      Longitude rLongitude (degres), d#équation du temps rEquaTemps (minutes),
-#      et de déclinaison du Soleil rDeltaRad (radians)
+#      Longitude rLongitude (degres), d#Ã©quation du temps rEquaTemps (minutes),
+#      et de dÃ©clinaison du Soleil rDeltaRad (radians)
 #
 #      ATTENTION
-#        Avant l#utilisation de ce SOUS-PROGRAMME, il faut avoir executé
+#        Avant l#utilisation de ce SOUS-PROGRAMME, il faut avoir executÃ©
 #      les SOUS-PROGRAMMES ParSolAnn(iAn%) et ParSolJour(iNJ%, iAn%)
-#        Il faut avoir precisé le lieu par sa rLatitude et sa rLongitude (degres)
+#        Il faut avoir precisÃ© le lieu par sa rLatitude et sa rLongitude (degres)
 #
 rLatRad = rLatitude * pi / 180
 # ... Calcul Heure en Temps Solaire Vrai, rHrTSV et Angle Horaire (radians), rHrRad
@@ -265,14 +265,14 @@ rHrTSV = rHr - 12 - rLongitude / 15 - rEquaTemps / 60
 rHrRad = rHrTSV * pi / 12
 # ... Calcul de la HAUTEUR du Soleil
 X = sin(rLatRad) * sin(rDeltaRad) + cos(rLatRad) * cos(rDeltaRad) * cos(rHrRad)
-if (X < 0) rHautSol = 0  #-99.9                    #le Soleil n#est pas levé
-rHautSol=ifelse ((X==1), 90, asin(X) * 180 / pi)          # XD : vérifier les radians
+if (X < 0) rHautSol = 0  #-99.9                    #le Soleil n#est pas levÃ©
+rHautSol=ifelse ((X==1), 90, asin(X) * 180 / pi)          # XD : vÃ©rifier les radians
 # ... Calcul de l'AZIMUT du Soleil
-#        codage signe: Nord    -180°
-#                      Est      -90°
-#                      Sud        0°
-#                      Ouest     90°
-#                      Nord     180°
+#        codage signe: Nord    -180Â°
+#                      Est      -90Â°
+#                      Sud        0Â°
+#                      Ouest     90Â°
+#                      Nord     180Â°
 #
 X = sin(rLatRad) * cos(rHrRad) - cos(rLatRad) * tan(rDeltaRad)
 if (X==0) {
@@ -295,20 +295,20 @@ rAzimSol = 0
 # fin sous-programme  ParSolHor
 
 rHeureTSV = rHr - rLongitude / 15 - rEquaTemps / 60   #temps solaire vrai (h)
-rAHDeg = (rHeureTSV - 12) * 15                        #angle horaire  (degrés)
+rAHDeg = (rHeureTSV - 12) * 15                        #angle horaire  (degrÃ©s)
 rAHRad = rAHDeg * pi / 180                          #angle horaire  (radians)
 rHautSolRad = rHautSol * pi / 180                   #hauteur soleil (radians)
 rAzimSolRad = rAzimSol * pi / 180                   #azimut soleil (radians)
 
 iSJtot = iSJtot + 1                   #compteur jour
 
-            #Microclimat_Feuilles                         #MsgBox "Microclimat_Feuilles  Terminé"
+            #Microclimat_Feuilles                         #MsgBox "Microclimat_Feuilles  TerminÃ©"
 
-            #rSJTleaf = rSJTleaf + rTleaf                #mise à jour des intégrales journalières microclimat
+            #rSJTleaf = rSJTleaf + rTleaf                #mise Ã  jour des intÃ©grales journaliÃ¨res microclimat
             #rSJDefSat = rSJDefSat + rDefSat
 
 if (rHautSol>0) {        #DEBUT TEST rHautSol > 0  pour partie Ryt Solaire
-#rSJTleafDiurne = rSJTleafDiurne + rTleaf    #mise à jour des intégrales journ. microclimat periode diurne
+#rSJTleafDiurne = rSJTleafDiurne + rTleaf    #mise Ã  jour des intÃ©grales journ. microclimat periode diurne
 #rSJDefSatDiurne = rSJDefSatDiurne + rDefSat
 iSJdiurne = iSJdiurne + 1                   #compteur periode diurne
 r = 1353 * (1 + 2 * rExentr * cos(rOmegaRadparJour * iSimulDay + 0.5 - rDoyPerig))
@@ -317,14 +317,14 @@ rRytGloExtraAtm = r * sin(rHautSol * pi / 180)
 rRytGlo = rRytGloExtraAtm * rRgiJour / rRytGloExtraAtmJour
 #End If
 
-                if (rRytGloExtraAtm>0) {             #Début calcul Rayonnement Diffus
+                if (rRytGloExtraAtm>0) {             #DÃ©but calcul Rayonnement Diffus
                     GSG0 = rRytGlo / rRytGloExtraAtm
                     }else{GSG0 = 0
                     }
 
 
-                #DSG = 1.09 - 2.6896 * GSG0 * GSG0 + 1.2843 * GSG0 * GSG0 * GSG0   # relation journalière à Bordeaux (CV)
-                DSG = 1.09 - 2.44 * GSG0 * GSG0 + 1.084 * GSG0 * GSG0 * GSG0   # relation horaire à Bordeaux (CV)
+                #DSG = 1.09 - 2.6896 * GSG0 * GSG0 + 1.2843 * GSG0 * GSG0 * GSG0   # relation journaliÃ¨re Ã  Bordeaux (CV)
+                DSG = 1.09 - 2.44 * GSG0 * GSG0 + 1.084 * GSG0 * GSG0 * GSG0   # relation horaire Ã  Bordeaux (CV)
 
                 if (DSG>1) DSG = 1
                 if (GSG0 >= 0.2) {
@@ -384,7 +384,7 @@ rRytGlo = rRytGloExtraAtm * rRgiJour / rRytGloExtraAtmJour
 
 #Sub CoefAbsRytDir()
 #       ex-subroutine ARDIR(rKdifSol, rKdir, cardir, crrdir)
-#       calcul des taux d'absorption (cardir) et de de réflexion (crrdir) du rayt. direct
+#       calcul des taux d'absorption (cardir) et de de rÃ©flexion (crrdir) du rayt. direct
 rCardir = (1 - rAlbedoFeuilles) * ((1 - rAlbedoSol * rKdifSol) * rKdir + rAlbedoSol * rKdifSol)
 rCrrdir = (rAlbedoFeuilles - rAlbedoSol * (1 - rKdifSol) - rAlbedoFeuilles * rAlbedoSol * rKdifSol / 2) * rKdir
 rCrrdir = rCrrdir + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol * rKdifSol / 2)
@@ -417,7 +417,7 @@ rCrrdir = rCrrdir + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
             rRgsRel = 0
             }
 
-        rSJRytGlo = rSJRytGlo + rRytGlo * rDt                 #Mise à Jour des Intégrales Journalières / Rayonnement
+        rSJRytGlo = rSJRytGlo + rRytGlo * rDt                 #Mise Ã  Jour des IntÃ©grales JournaliÃ¨res / Rayonnement
         rSJRytDif = rSJRytDif + rRytDif * rDt
         rSJRytGloVigne = rSJRytGloVigne + rRytGloVigne * rDt
         rSJRytGloSol = rSJRytGloSol + rRytGloSol * rDt
@@ -426,7 +426,7 @@ rCrrdir = rCrrdir + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
     j = j + 1
     }             #FIN BOUCLE HORAIRE commencee par : Do While (j < CInt(24 / (rDt / 3600)))
 
-    # ------------------------------  mise à jour des intégrales journalières (rSJ...)  ---------------------
+    # ------------------------------  mise Ã  jour des intÃ©grales journaliÃ¨res (rSJ...)  ---------------------
     #                                 et sur toute la duree du fichier d#entree (rSom...)
 
         if (rSJRytGlo>0){
@@ -437,8 +437,8 @@ rCrrdir = rCrrdir + (rAlbedoSol * (1 - rKdifSol) + rAlbedoFeuilles * rAlbedoSol 
 
 }       #fin boucle if rHautRang > 0  (realisation calculs int ryt dans boucle horaire)
 
-    # ------------------------------  sorties journalières  ------------------------------------
-    #                           (intégrales sur la durée de la journée)
+    # ------------------------------  sorties journaliÃ¨res  ------------------------------------
+    #                           (intÃ©grales sur la durÃ©e de la journÃ©e)
 sor_ryt=data.frame(c(1:25))    
 sor_ryt[1,1]= iSimulDay
 sor_ryt[2,1]= iYear
@@ -451,7 +451,7 @@ sor_ryt[8,1]= rRgiJour / 1000000
 
         if (rHautRang>0){   #donc si realisation calculs int ryt (et event. photos.) dans boucle horaire
             sor_ryt[9,1] = rEcartRangs
-            sor_ryt[10,1] = az_r     #comme en entrée :   0 pour rangs NS, 90 pour EW et -45 pour NW-SE
+            sor_ryt[10,1] = az_r     #comme en entrÃ©e :   0 pour rangs NS, 90 pour EW et -45 pour NW-SE
             sor_ryt[11,1] = rHautRang
             sor_ryt[12,1] = rLargRang
             sor_ryt[13,1] = rPorosite
@@ -466,8 +466,8 @@ sor_ryt[8,1]= rRgiJour / 1000000
             sor_ryt[21,1] = rSJAlbedoVignoble
             sor_ryt[22,1] = rSJRgvRel
             sor_ryt[23,1] = rSJRgsRel
-            sor_ryt[24,1] = iSJdiurne #nb d#intervalles utilisés pour calculer les integrales SJ (jour entier)
-            sor_ryt[25,1] = iSJtot     #nb d#intervalles utilisés pour calculer les integrales SJ (per. diurne)
+            sor_ryt[24,1] = iSJdiurne #nb d#intervalles utilisÃ©s pour calculer les integrales SJ (jour entier)
+            sor_ryt[25,1] = iSJtot     #nb d#intervalles utilisÃ©s pour calculer les integrales SJ (per. diurne)
         }else{
             for (i in 9:25) {
                 sor_ryt[i,1] = 0      
@@ -475,7 +475,7 @@ sor_ryt[8,1]= rRgiJour / 1000000
         }      #FIN TEST   If rHautRang > 0 Then
                                 #(=test si realisation effective des calculs d#int ryt dans boucle horaire)
 
-#résultats journaliers :
+#rÃ©sultats journaliers :
     #Cells(i_ligne, 49).Value = sor_ryt(21)                              #alb
     #Cells(i_ligne, 50).Value = sor_ryt(22)                              #k_rgv
 return(sor_ryt[22,1])    # retourne en sortie le kmax de la vigne

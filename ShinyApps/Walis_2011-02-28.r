@@ -1,7 +1,7 @@
 
-# Bilan hydrique d'une vigne enherbée
+# Bilan hydrique d'une vigne enherb?e
 # X.Delpuech (IFV) d'apres F.Celette, A. Ripoche, 2009
-# S.Roux : quelques modifications pour paramétrage, lisibilité
+# S.Roux : quelques modifications pour param?trage, lisibilit?
 #######################
 
 
@@ -10,20 +10,20 @@
 
 
 #######
-#  Fonction Somme de température base  cumsumb(vecteur température, base, ligne de début, ligne de fin)
-#  base : definit la valeur de base pour la somme des températures, par défaut = 10
-#  x : definit le vecteur d'entrée
-#  debut : definit la ligne de debut du calcul, par défaut = 1
-#  fin : definit la ligne de fin du calcul, par défaut la dernière ligne de x
+#  Fonction Somme de temp?rature base  cumsumb(vecteur temp?rature, base, ligne de d?but, ligne de fin)
+#  base : definit la valeur de base pour la somme des temp?ratures, par d?faut = 10
+#  x : definit le vecteur d'entr?e
+#  debut : definit la ligne de debut du calcul, par d?faut = 1
+#  fin : definit la ligne de fin du calcul, par d?faut la derni?re ligne de x
 
 cumsumb<-function(x,base=10,debut=1,fin=length(x)) 
 {
-	somTb<-vector(mode="numeric",length = length(x)) #cree un vecteur vide du même nombre de ligne que le vecteur d'entrée x
-	ifelse (x[debut]>base,somTb[debut]<-(x[debut]-base),somTb[debut]<-0)  # Calcul la première valeur de la somme de Temp en base
+	somTb<-vector(mode="numeric",length = length(x)) #cree un vecteur vide du m?me nombre de ligne que le vecteur d'entr?e x
+	ifelse (x[debut]>base,somTb[debut]<-(x[debut]-base),somTb[debut]<-0)  # Calcul la premi?re valeur de la somme de Temp en base
 	for (i in (debut+1):fin)
 	{
 		ifelse (x[i]>base, somTb[i]<-(somTb[i-1]+x[i]-base), somTb[i]<-somTb[i-1])
-	}   # Calcul des SomTb de la ligne 2 à la fin des données météo
+	}   # Calcul des SomTb de la ligne 2 ? la fin des donn?es m?t?o
 	return(somTb)
 }
 
@@ -57,42 +57,42 @@ Ruiss<-function(P,sr) # P = pluie en mm , sr = seuil de ruissellement
 	return (y)
 }
 ###############################
-# paramétrage par defaut
+# param?trage par defaut
 
 
 nominal=list(p=0.6,
 		Tonte="N", 							# caractere {O,N} d'activation des tontes aux dates prevues (renint LAI)(si "N", tontes automatique /LAI)
-		nbtonte=c(2,2,2,0,0,0,0), 			# Définit le nombre de tonte chaque année de simulation
-		inn=0.3, 							# Définit l’INN de l’herbe
-		irri="N", 							# caractere {O,N} d'activation de l’irrigation qui branche la colonne "IR" du fichier meteo 
-		dtonte=rep("29/03",10), 			# date des tontes activé par le parametre "Tonte" 
-		dbr=rep("26/03",10), 				# dates de démarrage de la végétation de la vigne (en nombre >=supérieur ou égal au nombre d’années simulées)
-		arretTr="01/11", 					# date d’arrêt de transpiration de la vigne
-		ddkmax=600, 						# nombre de degré jour pour atteindre le Kmax
-		reinit="N",							# caractere {O,N} pour reinitialiser les stocks d'eau en debut d'année
-		pir=0, 								# Permet d’attribuer un CN différent (donné par CN_Ruiss2)  à l’inter-rang même en absence d’enherbement. 
+		nbtonte=c(2,2,2,0,0,0,0), 			# D?finit le nombre de tonte chaque ann?e de simulation
+		inn=0.3, 							# D?finit l?INN de l?herbe
+		irri="N", 							# caractere {O,N} d'activation de l?irrigation qui branche la colonne "IR" du fichier meteo 
+		dtonte=rep("29/03",10), 			# date des tontes activ? par le parametre "Tonte" 
+		dbr=rep("26/03",10), 				# dates de d?marrage de la v?g?tation de la vigne (en nombre >=sup?rieur ou ?gal au nombre d?ann?es simul?es)
+		arretTr="01/11", 					# date d?arr?t de transpiration de la vigne
+		ddkmax=600, 						# nombre de degr? jour pour atteindre le Kmax
+		reinit="N",							# caractere {O,N} pour reinitialiser les stocks d'eau en debut d'ann?e
+		pir=0, 								# Permet d?attribuer un CN diff?rent (donn? par CN_Ruiss2)  ? l?inter-rang m?me en absence d?enherbement. 
 		seuilpeff=2,						# seuil de pluie efficace
-		kmax=rep(0.43,10),					# coefficient d’interception du rayonnement de la vigne
-		levee="01/01",						# date de levée de l’enherbement 
+		kmax=rep(0.43,10),					# coefficient d?interception du rayonnement de la vigne
+		levee="01/01",						# date de lev?e de l?enherbement 
 		flagRuiss="O",						# utilisation du module de ruissellement "O" active
 		CN_Ruiss=94,						# CN (ruissellement) sous le rang
-		CN_Ruiss2=84,						# CN (ruissellement) dans l’inter-rang
-		herblairate=0.9,					# LAI rate de l’enherbement
-		LAIinit=0.5,						# LAI initial de l’enherbement
-		LAIres=0.3,							# LAI résiduel de l’enherbement après une tonte
-		LLSmin=700,							# LLSmin de l’herbe
-		LAItonte=3,							# LAI à partir duquel on déclenche une tonte automatiquement
-		U=2.7,								# paramètre U d’évaporation du sol
-		b1_evap=14,							# paramètre b1_evap d’évaporation du sol
-		b2_evap=0.15,						# paramètre b2_evap d’évaporation du sol
-		FTSWhregultr=0.6,					# FTSW du compartiment herbe à partir de laquelle l’herbe régule sa transpiration
-		FTSWhregulLAI=0.9,					# FTSW du compartiment herbe à partir de laquelle l’herbe régule son LAI
+		CN_Ruiss2=84,						# CN (ruissellement) dans l?inter-rang
+		herblairate=0.9,					# LAI rate de l?enherbement
+		LAIinit=0.5,						# LAI initial de l?enherbement
+		LAIres=0.3,							# LAI r?siduel de l?enherbement apr?s une tonte
+		LLSmin=700,							# LLSmin de l?herbe
+		LAItonte=3,							# LAI ? partir duquel on d?clenche une tonte automatiquement
+		U=2.7,								# param?tre U d??vaporation du sol
+		b1_evap=14,							# param?tre b1_evap d??vaporation du sol
+		b2_evap=0.15,						# param?tre b2_evap d??vaporation du sol
+		FTSWhregultr=0.6,					# FTSW du compartiment herbe ? partir de laquelle l?herbe r?gule sa transpiration
+		FTSWhregulLAI=0.9,					# FTSW du compartiment herbe ? partir de laquelle l?herbe r?gule son LAI
 		TTSWh=129,							# TTSW du compartiment herbe
 		TTSWv=224,							# TTSW du compartiment vigne
-		FTSWvregulTR=0.4,					# FTSW du compartiment vigne à partir de laquelle la vigne régule sa transpiration
-		ASWhinit=70.92,						# quantité d’eau dans le compartiment vigne en début de simulation
-		ASWvinit=178.18,						# quantité d’eau dans le compartiment herbe  en début de simulation
-		format_date="%d/%m/%Y"    # format des dates dans le fichier météo d'entrée
+		FTSWvregulTR=0.4,					# FTSW du compartiment vigne ? partir de laquelle la vigne r?gule sa transpiration
+		ASWhinit=70.92,						# quantit? d?eau dans le compartiment vigne en d?but de simulation
+		ASWvinit=178.18,						# quantit? d?eau dans le compartiment herbe  en d?but de simulation
+		format_date="%d/%m/%Y"    # format des dates dans le fichier m?t?o d'entr?e
 		)
 
 
@@ -110,11 +110,11 @@ walis.model.single<-function( param, meteo)
 
 	dat<-as.POSIXlt(strptime(meteo$Date,param$format_date))
 	#
-	# Nombre d'année : "an" donne le nombre d'années dans le fichier
-  ans<-unique(dat$year)  # donne le vecteur des années du fichier
-  an<-length(ans)        # donne le nombre d'année dans le fichier
+	# Nombre d'ann?e : "an" donne le nombre d'ann?es dans le fichier
+  ans<-unique(dat$year)  # donne le vecteur des ann?es du fichier
+  an<-length(ans)        # donne le nombre d'ann?e dans le fichier
 	
-	# jdeb donne les lignes de début de chaque année	
+	# jdeb donne les lignes de d?but de chaque ann?e	
   jj<-as.POSIXlt(dat)$yday # vecteur des jours julien
   ll<-c(1:dim(meteo)[1]) # vecteur indice des lignes
   jdeb<-ll[jj==0]
@@ -123,8 +123,8 @@ walis.model.single<-function( param, meteo)
   jdeb[an+1]<-(dim(meteo)[1]+1)
 
 
-	# Calcul des lignes correspondant aux dates du BH (avec cette méthode, il y a un décalage d'un jour les années non bisextiles, 
-	#il faudrait rajouter les années...)
+	# Calcul des lignes correspondant aux dates du BH (avec cette m?thode, il y a un d?calage d'un jour les ann?es non bisextiles, 
+	#il faudrait rajouter les ann?es...)
 	# la fonction as.POSIXlt()$yday donne le jour julien de la date
 	leveejj		<-as.POSIXlt(as.Date(param$levee,"%d/%m"))$yday
 	dbrjj		<-as.POSIXlt(as.Date(param$dbr,"%d/%m"))$yday
@@ -133,11 +133,11 @@ walis.model.single<-function( param, meteo)
 	Ldbr		<-c(1:an)
 	Ltonte		<-c(1:sum(param$nbtonte[1:an]))
 
-# Calcul des indices débourrement
+# Calcul des indices d?bourrement
 # pour la premiere annee, si la date de debourrement est anterieure au premier jour du fichier
 if ((dbrjj[1]-jj[1])<0)
 {
-dbrjj[1]<-jj[1] # forçage au premier jour
+dbrjj[1]<-jj[1] # for?age au premier jour
 print ("Attention : date de dbr pour l'annee 1 forcee au 1er jour")
 } 
 # au cas ou la date de debourrement est posterieure a la fin du fichier
@@ -154,8 +154,8 @@ Ldbr[i]<-ll[dat$year==ans[i]&jj==dbrjj[i]]
 Llevee<-ll[jj==leveejj]
 if (an>1 & jj[1]>leveejj) Llevee=c(1,Llevee)
 
-# pour l'annee 1, il se peut que la date de levée soit antérieure au 1er jour de données
-# par exemple si le fichier ne démarre pas au 01/01  
+# pour l'annee 1, il se peut que la date de lev?e soit ant?rieure au 1er jour de donn?es
+# par exemple si le fichier ne d?marre pas au 01/01  
 	Llevee[1] <- leveejj[1]-strptime(meteo$Date[1],param$format_date)$yday
 	if (Llevee[1]<0)
 	{
@@ -184,8 +184,8 @@ for (i in 1:param$nbtonte[1])
 {
 if ((tontejj[i]-jj[1])<0)
 {
-tontejj[i]<-jj[1] # forçage au premier jour
-print (paste("Attention : date de tonte n°",i," pour l'annee 1 forcee au 1er jour"))
+tontejj[i]<-jj[1] # for?age au premier jour
+print (paste("Attention : date de tonte n?",i," pour l'annee 1 forcee au 1er jour"))
 }
 } 
 i<-1
@@ -197,7 +197,7 @@ if (i>sum(param$nbtonte)) break()
 if (max(jj[dat$year==ans[tt]])-tontejj[i]<0)
 {
 Ltonte[i]<-length(ll)
-print(paste("Attention : forcage date de tonte n°",i," au dernier jour"))
+print(paste("Attention : forcage date de tonte n?",i," au dernier jour"))
 }
 if (max(jj[dat$year==ans[tt]])-tontejj[i]>0)
 {
@@ -208,7 +208,7 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 }
 
 	
-	# Calcul des vecteurs somme de T°C
+	# Calcul des vecteurs somme de T?C
 	somTb10	<-vector(mode="numeric",length = dim(meteo)[1])
 	for (a in 1:an)
 		somTb10<-(somTb10+cumsumb(meteo$Temp,debut=Ldbr[a], fin=(jdeb[a+1]-1)))
@@ -265,29 +265,29 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 	ETPh<-(meteo$ETP*param$p)
 
 	#
-	# Calcul de Temp base 0 à partir de la levée de l'enherbement
+	# Calcul de Temp base 0 ? partir de la lev?e de l'enherbement
 	Tb0<-rep(0,dim(meteo)[1]) 
 	for (a in 1:an)
 		for (i in Llevee[a]:(jdeb[a+1]-1))
 			ifelse(meteo$Temp[i]>0,Tb0[i]<-meteo$Temp[i],Tb0[i]<-0)
 
 
-	# Calcul du kvigne estimé
+	# Calcul du kvigne estim?
 	kv<-rep(0,dim(meteo)[1]) #vecteur vide
 	for (a in 1:an)
 		for (i in Ldbr[a]:LarretTr[a])
 		{
 			kv[i]<-param$kmax[a]
 			if (somTb10[i]<param$ddkmax)# 
-				kv[i]<-(param$kmax[a]*(somTb10[i]/param$ddkmax))  # croissance linéaire du Kv du dbr jusqu'à somTb10=ddkmax
+				kv[i]<-(param$kmax[a]*(somTb10[i]/param$ddkmax))  # croissance lin?aire du Kv du dbr jusqu'? somTb10=ddkmax
 			if (i>(LarretTr[a]-15) & i<(length(ll)-15))  # 
-				kv[i]<-(param$kmax[a]-param$kmax[a]*min(1,1-(LarretTr[a]-i)/15))      # decroissance lineaire à partir de 15j avant l'arrêt de transpiration
+				kv[i]<-(param$kmax[a]-param$kmax[a]*min(1,1-(LarretTr[a]-i)/15))      # decroissance lineaire ? partir de 15j avant l'arr?t de transpiration
 		}
 
 	#
 	# Calcul de INN
 	INN<-rep(0,dim(meteo)[1])
-	INN<-INN+param$inn # à ce stade de développement, la valeur de INN est fixé par défaut à 0.3
+	INN<-INN+param$inn # ? ce stade de d?veloppement, la valeur de INN est fix? par d?faut ? 0.3
 	
 	#
 	# Calcul de Es0
@@ -359,7 +359,7 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 	ETRh[1]<-(ETPh[1]*(1-kv[1])*Kh[1]*Ktransp[1])
 	j<-1
 	a<-1
-	if (param$Tonte=="O") param$LAItonte<-100 # cette valeur désactive LAItonte si les dates de tontes sont actives
+	if (param$Tonte=="O") param$LAItonte<-100 # cette valeur d?sactive LAItonte si les dates de tontes sont actives
 	tont<-1 # compteur de date de tonte
 	
 	
@@ -371,7 +371,7 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 		j<-j+1
 		if (j>dim(meteo)[1]) break()
 
-		# Calcul de la sénescence folaire de l'herbe
+		# Calcul de la s?nescence folaire de l'herbe
 		crherbe[j]	<-(param$herblairate*1.71*0.001*min(18,Tb0[j])^2*KLAI[j-1]*INN[j-1])
 		STb0[j]		<-STb0[j-1]+Tb0[j]
 		if (STb0[j-1]>param$LLSmin | LAI[j-1]==param$LAIres) LAIsen[j]<-LAI[j-1] else LAIsen[j]<-LAIsen[j-1]
@@ -403,7 +403,7 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 		Dh[j]		<-max(0,ASWh[j-1]+Peffh_Ruiss[j]-param$TTSWh)
 		Dv[j]		<-max(0,ASWv[j-1]+Peffv_Ruiss[j]-param$TTSWv)
 		ASWv[j]		<-max(0,min(param$TTSWv,ASWv[j-1]+Peffv_Ruiss[j]-(ASWv[j-1]/ASWtot[j-1])*Tv[j]-ESn[j]+Dh[j]))
-		if (param$irri=="O") ASWv[j]<-ASWv[j]+meteo$IR[j] # s'il  a de l'irrigation, on la rajoute directement à l'ASWv
+		if (param$irri=="O") ASWv[j]<-ASWv[j]+meteo$IR[j] # s'il  a de l'irrigation, on la rajoute directement ? l'ASWv
 		FTSWv[j]<-(ASWv[j]/param$TTSWv)
 		ASWtot[j]<-(ASWv[j]+ASWh[j])
 		FTSWtot[j]<-(ASWtot[j]/TTSWtot)
@@ -425,7 +425,7 @@ if (i>cumsum(param$nbtonte)[tt]) tt<-tt+1
 
 
 #######################################################
-# application du modèle sur des matrices de paramètres
+# application du mod?le sur des matrices de param?tres
 
 walis.model <- function(param, clim_data)
 return(apply(param,walis.model.single,clim_data))
