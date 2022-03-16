@@ -1,13 +1,79 @@
-pageWithSidebar(
-  headerPanel('Iris k-means clustering - test WALIS'),
-  sidebarPanel(
-    selectInput('xcol', 'X Variable', names(iris)),
-    selectInput('ycol', 'Y Variable', names(iris),
-                selected=names(iris)[[2]]),
-    numericInput('clusters', 'Cluster count', 3,
-                 min = 1, max = 9)
-  ),
-  mainPanel(
-    plotOutput('plot1')
+# Define UI for data upload app ----
+fluidPage(
+  
+  # App title ----
+  titlePanel("Controles"),
+  
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+    
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+      
+      # Input: Select a file 1----
+      fileInput("file1", "Donnees meteo en format CSV",
+                multiple = TRUE,
+                accept = c("text/csv",
+                           "text/comma-separated-values,text/plain",
+                           ".csv")),
+      
+      # Input: Select a file 2 ----
+      fileInput("file2", "Parametres en format CSV",
+                multiple = TRUE,
+                accept = c("text/csv",
+                           "text/comma-separated-values,text/plain",
+                           ".csv")),
+      
+      # Horizontal line ----
+      tags$hr(),
+      
+      # Input: Checkbox if file has header ----
+      checkboxInput("header", "Header", TRUE),
+      
+      # Input: Select separator ----
+      radioButtons("sep", "Separateur",
+                   choices = c(Virgule = ",",
+                               PointVirgule = ";",
+                               Tabulation = "\t"),
+                   selected = ";"),
+      
+      # Input: Select decimal ----
+      radioButtons("dec", "Decimale",
+                   choices = c(Point = ".",
+                               "Virgule" = ","),
+                   selected = ","),
+      
+      # Horizontal line ----
+      tags$hr(),
+      
+      # Input: Select number of rows to display ----
+      radioButtons("disp", "Vue",
+                   choices = c(Debut = "head",
+                               Tout = "all"),
+                   selected = "head"),
+      
+      # Button
+      downloadButton("downloadData", "Download"),
+      
+      # Horizontal line ----
+      tags$hr(),
+      
+      # Example Files to download
+      h4("Exemples a telecharger :"),
+      a(href="ex_meteo.csv", "Fichier modele donnees meteo", download=NA, target="_blank"),
+      a(href="ex_parametres.csv", "Fichier modele parametres", download=NA, target="_blank"),
+    ),
+    
+    # Main panel for displaying outputs ----
+    mainPanel(
+      
+      # Output: Data file ----
+      tableOutput("tableMto"),
+      tableOutput("tableParam"),
+      plotOutput("distPlot")
+      
+      
+    )
+    
   )
 )
