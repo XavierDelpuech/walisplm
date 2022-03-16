@@ -1,9 +1,9 @@
 function(input, output) {
   #browser() ## permet d'arreter le code pour debogage
   ## source model Walis
-  source("Walis_2011-02-28.R")
+  source("Walis_2011-02-28.R",encoding="UTF-8")
   ## source model Kmax
-  source("Module_calcul_Kmax_2012.R")
+  source("Module_calcul_Kmax_2012.R",encoding="UTF-8")
   
   ### pour stocker l'objet datamto (input$file1)
   ### datamto est une fonction, il faut l'appeler avec des ()
