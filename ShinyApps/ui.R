@@ -1,5 +1,5 @@
 pageWithSidebar(
-  headerPanel('Iris k-means clustering'),
+  headerPanel('Iris k-means clustering - test WALIS'),
   sidebarPanel(
     selectInput('xcol', 'X Variable', names(iris)),
     selectInput('ycol', 'Y Variable', names(iris),
