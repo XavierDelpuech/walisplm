@@ -31,9 +31,9 @@ function(input, output, session) {
     }
     #
     ## source model Walis
-    source(file="Walis_2011-02-28.R",encoding="UTF-8")
+    source(file="Walis_2011-02-28.R",encoding="UTF-8",local=T)
     ## source model Kmax
-    source(file="Module_calcul_Kmax_2012.R",encoding="UTF-8")
+    source(file="Module_calcul_Kmax_2012.R",encoding="UTF-8",local=T)
     
     par <- param()
     par=data.frame(Valeur=par[,2],row.names=par[,1])
