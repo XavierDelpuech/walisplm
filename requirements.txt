@@ -1,2 +1,2 @@
-shiny
+shinydashboard
 ggplot2
