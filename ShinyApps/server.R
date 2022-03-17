@@ -1,5 +1,12 @@
-shinyServer(function(input, output, session) {
+function(input, output, session) {
   #browser() ## permet d'arreter le code pour debogage
+  
+  ## fichier source
+  ## source model Walis
+  source(file="Walis_2011-02-28.R")
+  ## source model Kmax
+  source(file="Module_calcul_Kmax_2012.R")
+  
   
   ### pour stocker l'objet datamto (input$file1)
   ### datamto est une fonction, il faut l'appeler avec des ()
@@ -21,6 +28,7 @@ shinyServer(function(input, output, session) {
              dec = input$dec)
   })
   
+  ### fonction data.frame
   resultsDataFrame <- reactive({
     # Fonction Potentiel de base Pb=f(FTSW)
     Pb<-function(x,a=1.0572,b=5.3452)
@@ -30,10 +38,6 @@ shinyServer(function(input, output, session) {
       return (y)
     }
     #
-    ## source model Walis
-    source(file="Walis_2011-02-28.R")
-    ## source model Kmax
-    source(file="Module_calcul_Kmax_2012.R")
     
     par <- param()
     par=data.frame(Valeur=par[,2],row.names=par[,1])
@@ -154,4 +158,3 @@ shinyServer(function(input, output, session) {
       write.csv2(resultsDataFrame(),file,row.names = FALSE)
     })    
 }
-)
