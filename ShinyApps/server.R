@@ -1,4 +1,4 @@
-function(input, output, session) {
+shinyServer(function(input, output, session) {
   #browser() ## permet d'arreter le code pour debogage
   
   ### pour stocker l'objet datamto (input$file1)
@@ -31,9 +31,9 @@ function(input, output, session) {
     }
     #
     ## source model Walis
-    source(file="Walis_2011-02-28.R",encoding="UTF-8",local=T)
+    source(file="Walis_2011-02-28.R")
     ## source model Kmax
-    source(file="Module_calcul_Kmax_2012.R",encoding="UTF-8",local=T)
+    source(file="Module_calcul_Kmax_2012.R")
     
     par <- param()
     par=data.frame(Valeur=par[,2],row.names=par[,1])
@@ -154,3 +154,4 @@ function(input, output, session) {
       write.csv2(resultsDataFrame(),file,row.names = FALSE)
     })    
 }
+)
