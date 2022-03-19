@@ -3,9 +3,9 @@ function(input, output, session) {
   
   ## fichier source
   ## source model Walis
-  source(file="Walis_2011-02-28.R")
+  {source(file="Walis_2011-02-28.R")}
   ## source model Kmax
-  source(file="Module_calcul_Kmax_2012.R")
+  {source(file="Module_calcul_Kmax_2012.R")}
   
   
   ### pour stocker l'objet datamto (input$file1)
